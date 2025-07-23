@@ -1,6 +1,6 @@
 # Short-term memory trainer
 
-This little cute and light application was designed to help you train your Short-term memory capabilities.
+This little cute application was designed to help you train your Short-term memory capabilities.
 
 # What does it do?
 
@@ -10,4 +10,4 @@ Difficulty defines how many characters there are in the string and if the string
 
 Good luck!
 
-And remember, "With great memory comes great satisfaction from your own intellect".
+And remember, "With great memory come great possibilities". *insert Trade Mark sign here*
