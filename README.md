@@ -1,6 +1,6 @@
 # Short-term memory trainer
 
-This little cute and light application was designed to help you train your Short-term memory capabilities.
+This little cute application was designed to help you train your Short-term memory capabilities.
 
 # What does it do?
 
