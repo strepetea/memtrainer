@@ -2,7 +2,6 @@ use core::time;
 use rand::Rng;
 use std::io;
 use std::thread::sleep;
-use std::usize;
 
 /// Generates a random string of length and with charset based on the given difficulty.
 fn gen_random_string(mut difficulty: usize) -> String {
@@ -37,26 +36,22 @@ fn gen_random_string(mut difficulty: usize) -> String {
 /// Returns difficulty level from user with stdin.
 fn get_difficulty() -> usize {
     loop {
-        let mut input: String = String::with_capacity(1);
         println!("Please input the difficulty:\n'0' - easy\n'1' - medium\n'2' - hard");
-        io::stdin()
-            .read_line(&mut input)
-            .expect("Failed to read line");
-
-        match input.trim().parse::<usize>() {
-            Ok(num) => {
-                if [0, 1, 2].contains(&num) {
-                    return num;
+        let input = get_user_input().parse::<usize>();
+        match input {
+            Ok(input) => {
+                if [0, 1, 2].contains(&input) {
+                    return input;
                 } else {
                     println!("Invalid input, try one of these: '0', '1', '2'!");
                     continue;
                 }
             }
             Err(e) => {
-                println!("ERROR: {e}");
+                println!("ERROR: function get_difficulty() received bad input. Error: '{e}'");
                 continue;
             }
-        };
+        }
     }
 }
 
@@ -65,12 +60,12 @@ fn get_user_input() -> String {
     io::stdin()
         .read_line(&mut input)
         .expect("Failed to read line");
-    return input.trim().to_uppercase().to_string();
+    input.trim().to_lowercase().to_string()
 }
 
 fn countdown(mut seconds: u8) {
     while seconds != 0 {
-        println!("{}...", seconds);
+        println!("{seconds}...");
         sleep(time::Duration::from_secs(1));
         seconds -= 1;
     }
@@ -94,11 +89,11 @@ fn main() {
                 );
                 countdown(3);
                 let i = get_user_input();
-                if s == i {
+                if s.to_lowercase() == i {
                     println!("Correct!");
                     score = score.wrapping_add(1);
                     continue;
-                } else if i == "QUIT".to_string() {
+                } else if i == "quit" {
                     break 'outer;
                 } else {
                     println!("Incorrect!");
@@ -108,7 +103,7 @@ fn main() {
             "1" => {
                 difficulty = get_difficulty();
             }
-            "Q" => {
+            "q" => {
                 break 'outer;
             }
             _ => {
